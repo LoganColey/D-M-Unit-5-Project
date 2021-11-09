@@ -10,10 +10,11 @@
 			margin: 0;
 			padding: 0;
 			height: 100%;
-			background: #DCDCDC !important;
+			background: black;
 		}
 		.user_card {
-			width: 1500px;
+			width: 50em;
+			height: 20em;
 			margin-top: auto;
 			margin-bottom: auto;
 			background: #74cfbf;
@@ -35,52 +36,111 @@
 
 		#form-title{
 			color: #fff;
+			text-align: center;
 		}
 		.login_btn {
 			width: 100%;
-			background: #33ccff !important;
-			color: white !important;
+			background: black ;
+			color: white ;
 		}
 		.login_btn:focus {
-			box-shadow: none !important;
-			outline: 0px !important;
+			box-shadow: none ;
+			outline: 1px ;
 		}
+		#form-title {
+        color: white;
+        margin-left: 1.5em;
+      }
 		.login_container {
-			padding: 0 2rem;
+			padding-top: .8em;
+			width:8em;
 		}
 		.input-group-text {
-			background: #f7ba5b !important;
-			color: white !important;
-			border: 0 !important;
-			border-radius: 0.25rem 0 0 0.25rem !important;
+			background: #f7ba5b ;
+			color: white ;
+			border: 0 ;
+			border-radius: 0.25rem 0 0 0.25rem ;
 		}
 		.input_user,
 		.input_pass:focus {
-			box-shadow: none !important;
-			outline: 0px !important;
+			box-shadow: none ;
+			outline: 0px ;
 		}
 
 	</style>
   </head>
   <body>
-					<form method="POST" action="">
+	
+		<div class="d-flex justify-content-center">
+		  <h3 id="form-title">REGISTER PLAYER</h3>
+		</div>
+		<div class="d-flex justify-content-center form_container">
+		  <form method="POST" action="">
+			{% csrf_token %}
+			<div class="input-group mb-3">
+			  
+			  <div class="input-group-append">
+				<span class="input-group-text"
+				  ><i class="fas fa-user"></i				<form method="POST" action="">
+							
+							
+							
+			<div class="user_card">						
               {% csrf_token %}
-							{{form.username}}
-							{{form.email}}
-							{{form.password1}}
-							{{form.password2}}
-              <input type="submit">
+			  {{form.username.label}}
+			  <div class="input-group mb-3">
+			 
+			  <div class="input-group-append">
+				<span class="input-group-text"
+				  ><i class="fas fa-user"></i
+				></span>
+			  </div>
+			  {{form.username}}
+			</div>
+			<div class="input-group mb-2">
+                {{form.email.label}}
+                <div class="input-group-append">
+                  <span class="input-group-text"
+                    ><i class="fas fa-envelope-square"></i
+                  ></span>
+                </div>
+                {{form.email}}
+              </div>
+			  <div class="input-group mb-2">
+                {{form.password1.label}}
+                <div class="input-group-append">
+                  <span class="input-group-text"
+                    ><i class="fas fa-key"></i
+                  ></span>
+                </div>
+                {{form.password1}}
+              </div>	
+			  <div class="input-group mb-2">
+                {{form.password2.label}}
+                <div class="input-group-append">
+                  <span class="input-group-text"
+                    ><i class="fas fa-key"></i
+                  ></span>
+                </div>
+                {{form.password2}}
+              </div>		
+			  <div class=" mt-3 login_container">
+                <input
+                  class="btn login_btn"
+                  type="submit"
+                  value="Create Player"
+                />
+              </div>
                             
 					</form>
 				<div>
                  {{form.errors}}
 				</div>
 						<a href="{% url 'login' %}" >Already have an account?</a>
-					</div>
-				</div>
+				
 			</div>
 		</div>
-	</div>
+		
 	
 </body>
 </html>
