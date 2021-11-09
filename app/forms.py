@@ -1,6 +1,7 @@
 from django.forms import ModelForm, fields
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
+from django.http import request
 from .models import Character
 from django.contrib.auth.models import User
 from app.models import  *
@@ -14,11 +15,14 @@ class CreateMonsterForm(ModelForm):
     class Meta:
         model = Monster
         fields ='__all__'
+        exclude = ['creator', 'stats']
 
 class CreateCharacterForm(ModelForm):
     class Meta:
         model = Character
-        fields = '__all__'
+        fields ='__all__'
+        exclude = ['creator']
+
 
 class CreateStatsForm(ModelForm):
     class Meta:
