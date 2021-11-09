@@ -9,3 +9,4 @@ admin.site.register(Monster)
 admin.site.register(Comment)
 admin.site.register(Campaign)
 admin.site.register(Notes)
+
