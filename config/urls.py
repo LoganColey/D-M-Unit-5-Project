@@ -26,6 +26,9 @@ urlpatterns = [
     path('welcome/', views.welcomeview, name='welcome'),
     path('DMpage/',views.DMview, name='DMview'),
     path('Playerpage/',views.Pview, name='Pview'),
+    path('Create_Monster', views.createmonsterview, name='CreateMonster'),
+    path('Create_Character', views.createcharacterview, name='CreateCharacter'),
+    
 
 
     # path('welcome/' views.welcome_page, name='welcome'),
