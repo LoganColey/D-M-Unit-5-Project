@@ -53,6 +53,8 @@ class Character(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     creator = ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.PROTECT, null=True, default=User)
     stats = ForeignKey(Stats, on_delete=models.PROTECT,null=True)
+
+
     def __str__(self) -> str:
            return self.name
 
@@ -60,7 +62,7 @@ class Monster(models.Model):
    name = models.CharField(max_length=200, null=True)
    descript = models.CharField(max_length=10000, null=True)
    date_created = models.DateTimeField(auto_now_add=True)
-   creator = ForeignKey(User,on_delete=models.PROTECT, null=True)
+   creator = ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.PROTECT, null=True, default=User)
    stats = ForeignKey(Stats, on_delete=models.PROTECT,null=True)
 
    def __str__(self) -> str:
