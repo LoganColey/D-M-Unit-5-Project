@@ -28,6 +28,15 @@ urlpatterns = [
     path('Playerpage/',views.Pview, name='Pview'),
     path('Create_Monster', views.createmonsterview, name='CreateMonster'),
     path('Create_Character', views.createcharacterview, name='CreateCharacter'),
+    path('Create_Campaign', views.createcampaignview, name='CreateCampaign'),
+    path('Update_Monster/<str:pk>/', views.updateMonster, name='UpdateMonster'),
+    path('Update_Character/<str:pk>/', views.updateCharacter, name='UpdateCharacter'),
+    path('Update_Campaign/<str:pk>/', views.updateCampaign, name='UpdateCampaign'),
+    path('Delete_Monster/<str:pk>/', views.deleteMonster, name='DeleteMonster'),
+    path('Delete_Character/<str:pk>/', views.deleteCharacter, name='DeleteCharacter'),
+    path('Delete_Campaign/<str:pk>/', views.deleteCampaign, name='DeleteCampaign'),
+    path("search_monster/", views.search_monster, name="search"),
+    path("add_stats_m/<str:pk>/", views.add_mstats_view, name="m_stats")
     
 
 
