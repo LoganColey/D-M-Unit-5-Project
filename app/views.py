@@ -97,6 +97,7 @@ def createcharacterview(request):
 					character = form.save()
 					character.creator = request.user
 					character.save()
+					return redirect('DMview')
 		return render(request, 'create_character.html', context)
 
 @login_required(login_url='login')
@@ -148,3 +149,85 @@ def deleteMonster(request, pk):
 
 	context = {'item':monster}
 	return render(request, 'delete_m.html', context)
+
+
+@login_required(login_url='login')
+def createcampaignview(request):
+		form = CreateCampaignForm()
+		context = {'form': form}
+		if request.method == "POST":
+			form = CreateCampaignForm(request.POST)
+			if form.is_valid():
+					Campaign = form.save()
+					Campaign.creator = request.user
+					Campaign.save()
+					return redirect('DMview')
+		return render(request, 'create_Campaign.html', context)
+
+@login_required(login_url='login')
+def updateCampaign(request, pk):
+
+	order = Campaign.objects.get(id=pk)
+	form = CreateCampaignForm(instance=order)
+
+	if request.method == 'POST':
+		form = CreateCampaignForm(request.POST, instance=order)
+		if form.is_valid():
+			form.save()
+			return redirect('home')
+
+	context = {'form':form}
+	return render(request, 'update_ca.html', context)
+
+@login_required(login_url='login')
+def deleteCampaign(request, pk):
+	campaign = Campaign.objects.get(id=pk)
+	if request.method == "POST":
+		campaign.delete()
+		return redirect('home')
+
+	context = {'item':campaign}
+	return render(request, 'delete_ch.html', context)
+
+@login_required(login_url='login')
+def search_monster(request):
+    if request.GET:
+        search = request.GET["search"]
+        monsters = Monster.objects.filter(name=search)
+        return render(request, "search_monster.html", {"monsters":monsters})	
+
+    return render(request, "search_monster.html")
+
+@login_required(login_url='login')
+def search_character(request):
+    if request.GET:
+        search = request.GET["search"]
+        characters = Character.objects.filter(name=search)
+        return render(request, "search_character.html", {"characters": characters})	
+
+    return render(request, "search_character.html")
+
+@login_required(login_url='login')
+def search_campaign(request):
+    if request.GET:
+        search = request.GET["search"]
+        campaigns = Campaign.objects.filter(name=search)
+        return render(request, "search_monster.html", {"campagins":campaigns})	
+
+    return render(request, "search_campaign.html")
+
+
+def add_mstats_view(request,pk):
+    monster = Monster.objects.get(id=pk)
+    form = CreateStatsForm()
+    if request.method == 'POST':
+        form = CreateStatsForm()
+        if form.is_valid():
+            stats = form.save()
+            monster.stats = stats
+            return redirect('home')
+
+    context = {'form':form}
+    return render(request, 'add_stats.html', context)
+    	
+
