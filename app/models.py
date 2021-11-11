@@ -3,16 +3,17 @@ from django.db import models
 from django.db.models.fields.related import ForeignKey, OneToOneField
 from django.db.models.deletion import CASCADE, PROTECT
 from django.conf import settings
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Stats(models.Model):
-    Hp = models.PositiveIntegerField(null=True)
-    Str = models.PositiveIntegerField(null=True)
-    Dex = models.PositiveIntegerField(null=True)
-    Con = models.PositiveIntegerField(null=True)
-    Int = models.PositiveIntegerField(null=True)
-    Wis = models.PositiveIntegerField(null=True)
-    Cha = models.PositiveIntegerField(null=True)
-    Walk = models.PositiveIntegerField(null=True)
+    Hp = models.PositiveIntegerField(null=True, validators=[MinValueValidator(1),MaxValueValidator(1000)])
+    Str = models.PositiveIntegerField(null=True, validators=[MinValueValidator(1),MaxValueValidator(20)])
+    Dex = models.PositiveIntegerField(null=True, validators=[MinValueValidator(1),MaxValueValidator(20)])
+    Con = models.PositiveIntegerField(null=True, validators=[MinValueValidator(1),MaxValueValidator(20)])
+    Int = models.PositiveIntegerField(null=True, validators=[MinValueValidator(1),MaxValueValidator(20)])
+    Wis = models.PositiveIntegerField(null=True, validators=[MinValueValidator(1),MaxValueValidator(20)])
+    Cha = models.PositiveIntegerField(null=True, validators=[MinValueValidator(1),MaxValueValidator(20)])
+    Walk = models.PositiveIntegerField(null=True, validators=[MinValueValidator(10),MaxValueValidator(60)])
 
 
 class Character(models.Model):
@@ -68,14 +69,6 @@ class Monster(models.Model):
    def __str__(self) -> str:
        return self.name
 
-
-class Comment(models.Model):
-    user = ForeignKey(User,on_delete=models.PROTECT, null=True)
-    monster = ForeignKey(Monster,on_delete=models.PROTECT, null=True)
-    content = models.CharField(max_length=10000, null=True)
-
-
-    
 class Campaign(models.Model):
     name = models.CharField(max_length=200)
     descript = models.CharField(max_length=3000)
@@ -86,3 +79,11 @@ class Campaign(models.Model):
 class Notes(models.Model):
     descript = models.CharField(max_length=3000)
     campaign = ForeignKey(Campaign,on_delete=models.PROTECT, null=True)
+
+class Comment(models.Model):
+    user = ForeignKey(User,on_delete=models.PROTECT, null=True)
+    monster = ForeignKey(Monster,on_delete=models.PROTECT, null=True)
+    content = models.CharField(max_length=10000, null=True)
+
+    def __str__(self) -> str:
+        return self.content
