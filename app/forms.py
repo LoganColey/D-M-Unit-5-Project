@@ -21,7 +21,7 @@ class CreateCharacterForm(ModelForm):
     class Meta:
         model = Character
         fields ='__all__'
-        exclude = ['creator']
+        exclude = ['creator', 'stats']
 
 
 class CreateStatsForm(ModelForm):
@@ -33,6 +33,7 @@ class CreateCampaignForm(ModelForm):
     class Meta:
         model = Campaign
         fields = '__all__'
+        exclude = ['creator']
 
 class CreateNoteForm(ModelForm):
     class Meta:
@@ -42,4 +43,4 @@ class CreateNoteForm(ModelForm):
 class CreateCommentForm(ModelForm):
     class Meta:
         model = Comment
-        fields = '__all__'
+        fields = ["content"]
